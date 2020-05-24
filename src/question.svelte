@@ -1,8 +1,9 @@
 <script>
+  // imports
+  import { score } from './store.js'
   // props
   export let question;
   export let nextQuestion;
-  export let addToScore;
 
   // js
 
@@ -35,7 +36,7 @@
       isAnswered = true;
       isCorrect = correct;
       if(correct) {
-        addToScore();
+        score.update(n => n + 1)
       }
     }
   }
