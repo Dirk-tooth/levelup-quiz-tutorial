@@ -3,6 +3,8 @@
   import Question from "./question.svelte";
 
   // js
+  let activeQuestion = 0;
+  let score = 0;
   let result;
 
   let quiz = getQuiz();
@@ -13,8 +15,18 @@
     return quiz;
   }
 
-  function handleClick() {
+  function nextQuestion() {
+    activeQuestion = activeQuestion + 1;
+  }
+
+  function resetQuiz() {
+    score = 0;
+    activeQuestion = 0;
     quiz = getQuiz();
+  }
+
+  function addToScore() {
+    score = score + 1;
   }
 
 </script>
@@ -24,13 +36,18 @@
 </style>
 
 <div>
-  <button on:click={handleClick}>Get New Questions</button>
+  <button on:click={resetQuiz}>Start New Questions</button>
+
+  <h3>My Score: {score}</h3>
+  <h4>Queston #{activeQuestion + 1}</h4>
 
   {#await quiz}
-    loading...
+    Loading...
   {:then data}
-    {#each data.results as question}
-     <Question question={question} />
+    {#each data.results as question, index}
+      {#if index === activeQuestion}
+      <Question {addToScore} {nextQuestion} {question} />
+      {/if}
     {/each}
   {/await}
 

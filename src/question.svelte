@@ -1,6 +1,8 @@
 <script>
   // props
   export let question;
+  export let nextQuestion;
+  export let addToScore;
 
   // js
 
@@ -29,8 +31,13 @@
   }
 
   function checkQuestion(correct) {
-    isAnswered = true;
-    isCorrect = correct;
+    if(!isAnswered) {
+      isAnswered = true;
+      isCorrect = correct;
+      if(correct) {
+        addToScore();
+      }
+    }
   }
 </script>
 
@@ -51,3 +58,9 @@
     {@html answer.answer}
   </button>
 {/each}
+
+{#if isAnswered}
+  <div>
+    <button on:click={nextQuestion}>Next Question</button>
+  </div>
+{/if}
