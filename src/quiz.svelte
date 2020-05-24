@@ -32,6 +32,8 @@
     console.log("I'm gone");
   })
 
+  // https://opentdb.com/api_config.php
+  // ^ url for more trivia
   async function getQuiz() {
     const res = await fetch("https://opentdb.com/api.php?amount=10&category=12&type=multiple");
     const quiz = await res.json();
@@ -66,6 +68,13 @@
    padding-left: 5vw;
    left: 0;
  }
+
+ footer {
+   margin-top: 30vh;
+   bottom: 0;
+   color: lightgray;
+   font-style: italic;
+ }
 </style>
 
 <div>
@@ -86,6 +95,9 @@
     {/each}
   {/await}
 </div>
+
+<footer>powered by https://opentdb.com/api_config.php</footer>
+
 
 {#if isModalOpen}
   <Modal on:close={resetQuiz}>
