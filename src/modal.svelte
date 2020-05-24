@@ -1,5 +1,10 @@
 <script>
   import { fade, fly } from 'svelte/transition';
+  import { createEventDispatcher } from 'svelte';
+
+  let w;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <style>
@@ -20,9 +25,12 @@
  }
 </style>
 
-<div class='modal-bg' transition:fade>
+<div class='modal-bg' transition:fade bind:clientWidth={w}>
   <div transition:fly={{ y: 200 }} class="modal">
-    <button>Close</button>
+    <button on:click={ () => dispatch('close') } >
+      Close
+    </button>
+    <div>This div's width is {w}</div>
     <slot />
   </div>
 </div>
