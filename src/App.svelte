@@ -1,6 +1,11 @@
 <script>
+  // imports
   import Quiz from './quiz.svelte';
+
+  // props
   export let name;
+
+  // js
 </script>
 
 <main>
@@ -22,10 +27,6 @@
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
-  }
-
-  :global(h4) {
-    color: green;
   }
 
   @media (min-width: 640px) {
