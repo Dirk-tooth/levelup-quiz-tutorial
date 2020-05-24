@@ -3,11 +3,13 @@
   import { fly } from 'svelte/transition';
   import { onMount, beforeUpdate, afterUpdate, onDestroy } from 'svelte';
   import Question from './question.svelte';
+  import Modal from './modal.svelte';
 
   // js
   let activeQuestion = 0;
   let score = 0;
   let result;
+  let isModalOpen = false;
 
   let quiz = getQuiz();
 
@@ -43,6 +45,7 @@
     score = 0;
     activeQuestion = 0;
     quiz = getQuiz();
+    isModalOpen = false;
   }
 
   function addToScore() {
@@ -50,9 +53,8 @@
   }
 
   // reactive statment
-  $: if(score > 7) {
-    alert("you won!");
-    resetQuiz();
+  $: if(score > 1) {
+    isModalOpen = true;
   }
 
   // reacctive decloration
@@ -86,5 +88,12 @@
       {/if}
     {/each}
   {/await}
-
 </div>
+
+{#if isModalOpen}
+  <Modal>
+    <h2>You Won!</h2>
+    <p>Congradulations!</p>
+    <button on:click={resetQuiz}>Start Over</button>
+  </Modal>
+{/if}

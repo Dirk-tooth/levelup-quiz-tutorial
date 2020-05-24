@@ -43,22 +43,31 @@
 
 <style>
   h5 {
-    color: blue;
+    color: red;
   }
 
   h5.isCorrect {
     color: green;
   }
 
-  h5.wrong {
+  button.correct {
+    color: green;
+  }
+
+  button.incorrect {
     color: red;
   }
+
+  button.unAnswered {
+    color: black;
+  }
+
 </style>
 
 <h3>{@html question.question}</h3>
 
 {#if isAnswered}
-  <h5 class:isCorrect class:wrong={!isCorrect}>
+  <h5 class:isCorrect>
     {#if isCorrect}
     You got it right!
     {:else}
@@ -68,7 +77,7 @@
 {/if}
 
 {#each allAnswers as answer}
-  <button disabled={isAnswered} on:click={() => checkQuestion(answer.correct)}>
+  <button class={!isAnswered ? 'unAnswered' : answer.correct ? 'correct' : 'incorrect'} disabled={isAnswered} on:click={() => checkQuestion(answer.correct)}>
     {@html answer.answer}
   </button>
 {/each}
