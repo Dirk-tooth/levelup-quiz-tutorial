@@ -24,6 +24,10 @@
     font-weight: 100;
   }
 
+  :global(h4) {
+    color: green;
+  }
+
   @media (min-width: 640px) {
     main {
       max-width: none;
